@@ -320,19 +320,13 @@ switch:
       then:
         - lambda: 'notify_internal_relay_changed("relay_1", false);'
 
-  - platform: gpio
-    name: Relay 2
+  - platform: template
+    name: "Relay 2"
     id: relay_2
-    icon: mdi:electric-switch
-    pin:
-      number: GPIO45
-    restore_mode: RESTORE_DEFAULT_OFF
-    on_turn_on:
-      then:
-        - lambda: 'notify_internal_relay_changed("relay_2", true);'
-    on_turn_off:
-      then:
-        - lambda: 'notify_internal_relay_changed("relay_2", false);'
+    turn_on_action:
+      - lambda: 'notify_internal_relay_changed("relay_2", true);'
+    turn_off_action:
+      - lambda: 'notify_internal_relay_changed("relay_2", false);'
 
   - platform: gpio
     name: Relay 3
