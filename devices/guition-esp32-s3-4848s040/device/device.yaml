@@ -288,7 +288,7 @@ sensor:
     name: "Panel Battery Voltage"
     id: panel_battery_voltage
     attenuation: auto
-    update_interval: 60s
+    update_interval: 300s
     filters:
       - multiply: 2.0
     icon: "mdi:battery-outline"
@@ -306,19 +306,13 @@ sensor:
     icon: "mdi:battery"
 
 switch:
-  - platform: gpio
-    name: Relay 1
+  - platform: template
+    name: "Relay 1"
     id: relay_1
-    icon: mdi:electric-switch
-    pin:
-      number: GPIO40
-    restore_mode: RESTORE_DEFAULT_OFF
-    on_turn_on:
-      then:
-        - lambda: 'notify_internal_relay_changed("relay_1", true);'
-    on_turn_off:
-      then:
-        - lambda: 'notify_internal_relay_changed("relay_1", false);'
+    turn_on_action:
+      - lambda: 'notify_internal_relay_changed("relay_1", true);'
+    turn_off_action:
+      - lambda: 'notify_internal_relay_changed("relay_1", false);'
 
   - platform: template
     name: "Relay 2"
@@ -328,19 +322,13 @@ switch:
     turn_off_action:
       - lambda: 'notify_internal_relay_changed("relay_2", false);'
 
-  - platform: gpio
-    name: Relay 3
+  - platform: template
+    name: "Relay 3"
     id: relay_3
-    icon: mdi:electric-switch
-    pin:
-      number: GPIO1
-    restore_mode: RESTORE_DEFAULT_OFF
-    on_turn_on:
-      then:
-        - lambda: 'notify_internal_relay_changed("relay_3", true);'
-    on_turn_off:
-      then:
-        - lambda: 'notify_internal_relay_changed("relay_3", false);'
+    turn_on_action:
+      - lambda: 'notify_internal_relay_changed("relay_3", true);'
+    turn_off_action:
+      - lambda: 'notify_internal_relay_changed("relay_3", false);'
 
 # Momentary relay buttons for push-button/dimmer inputs.
 button:
